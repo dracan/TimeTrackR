@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR", "TimeTrackR\Ti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR.Core", "TimeTrackR.Core\TimeTrackR.Core.csproj", "{23E8BF47-740B-430B-A99F-306B9C26FBDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR.Core.Tests", "TimeTrackR.Core.Tests\TimeTrackR.Core.Tests.csproj", "{DC391782-9568-40AB-B90F-937FE2493AE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{23E8BF47-740B-430B-A99F-306B9C26FBDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23E8BF47-740B-430B-A99F-306B9C26FBDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23E8BF47-740B-430B-A99F-306B9C26FBDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC391782-9568-40AB-B90F-937FE2493AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC391782-9568-40AB-B90F-937FE2493AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC391782-9568-40AB-B90F-937FE2493AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC391782-9568-40AB-B90F-937FE2493AE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
