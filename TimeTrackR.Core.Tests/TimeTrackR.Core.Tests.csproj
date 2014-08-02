@@ -49,6 +49,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimeTrackR.Core\TimeTrackR.Core.csproj">
+      <Project>{23e8bf47-740b-430b-a99f-306b9c26fbde}</Project>
+      <Name>TimeTrackR.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

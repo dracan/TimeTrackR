@@ -2,10 +2,16 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR", "TimeTrackR\TimeTrackR.csproj", "{FBFBBA04-FD4C-4FDF-BCCF-61785502140B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23E8BF47-740B-430B-A99F-306B9C26FBDE} = {23E8BF47-740B-430B-A99F-306B9C26FBDE}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR.Core", "TimeTrackR.Core\TimeTrackR.Core.csproj", "{23E8BF47-740B-430B-A99F-306B9C26FBDE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR.Core.Tests", "TimeTrackR.Core.Tests\TimeTrackR.Core.Tests.csproj", "{DC391782-9568-40AB-B90F-937FE2493AE8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23E8BF47-740B-430B-A99F-306B9C26FBDE} = {23E8BF47-740B-430B-A99F-306B9C26FBDE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
