@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using TimeTrackR.Core.Timer;
@@ -10,13 +11,13 @@ namespace TimeTrackR
     /// view model is assigned to the NotifyIcon in XAML. Alternatively, the startup routing
     /// in App.xaml.cs could have created this view model, and assigned it to the NotifyIcon.
     /// </summary>
-    public class NotifyIconViewModel
+    public class NotifyIconViewModel : INotifyPropertyChanged
     {
-        private readonly Timer _timer;
+        public Timer Timer { get; set; }
 
         public NotifyIconViewModel(Timer timer)
         {
-            _timer = timer;
+            Timer = timer;
         }
 
         /// <summary>
@@ -47,8 +48,8 @@ namespace TimeTrackR
             {
                 return new DelegateCommand
                 {
-                    CanExecuteFunc = () => _timer.State == Timer.States.Stopped,
-                    CommandAction = () => _timer.Start()
+                    CanExecuteFunc = () => Timer.State == Timer.States.Stopped,
+                    CommandAction = () => Timer.Start()
                 };
             }
         }
@@ -62,8 +63,12 @@ namespace TimeTrackR
             {
                 return new DelegateCommand
                 {
-                    CanExecuteFunc = () => _timer.State == Timer.States.Started,
-                    CommandAction = () => _timer.Stop()
+                    CanExecuteFunc = () => Timer.State == Timer.States.Started,
+                    CommandAction = () =>
+                                    {
+                                        Timer.Stop();
+                                        OnPropertyChanged("Timer");
+                                    }
                 };
             }
         }
@@ -78,8 +83,15 @@ namespace TimeTrackR
                 return new DelegateCommand {CommandAction = () => Application.Current.Shutdown()};
             }
         }
-    }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if(handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 
     /// <summary>
     /// Simplistic delegate command for the demo.

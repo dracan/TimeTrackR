@@ -21,7 +21,7 @@
               Opacity="1.0"
               Width="160"
               Height="40">
-                <TextBlock Text="Placeholder tooltip" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Timer.TotalTime, StringFormat={}{0:g}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
         </tb:TaskbarIcon.TrayToolTip>
     </tb:TaskbarIcon>
