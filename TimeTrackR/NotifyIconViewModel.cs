@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using TimeTrackR.Core.Timer;
 
 namespace TimeTrackR
 {
@@ -11,6 +12,13 @@ namespace TimeTrackR
     /// </summary>
     public class NotifyIconViewModel
     {
+        private readonly Timer _timer;
+
+        public NotifyIconViewModel(Timer timer)
+        {
+            _timer = timer;
+        }
+
         /// <summary>
         /// Shows a window, if none is already open.
         /// </summary>

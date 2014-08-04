@@ -1,6 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
+using Ninject;
+using TimeTrackR.Classes;
 
 namespace TimeTrackR
 {
@@ -15,8 +16,17 @@ namespace TimeTrackR
         {
             base.OnStartup(e);
 
+            IKernel kernel = new StandardKernel(new DiModule());
+
+            var viewModel = kernel.Get<NotifyIconViewModel>();
+
             // Create the notifyicon (it's a resource declared in NotifyIconResources.xaml)
             notifyIcon = (TaskbarIcon)FindResource("SysTrayNotifyIcon");
+
+            if(notifyIcon != null)
+            {
+                notifyIcon.DataContext = viewModel;
+            }
         }
 
         protected override void OnExit(ExitEventArgs e)

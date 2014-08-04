@@ -22,10 +22,6 @@
                 <TextBlock Text="Placeholder tooltip" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
         </tb:TaskbarIcon.TrayToolTip>
-        <!-- self-assign a data context (could also be done programmatically) -->
-        <tb:TaskbarIcon.DataContext>
-            <local:NotifyIconViewModel />
-        </tb:TaskbarIcon.DataContext>
     </tb:TaskbarIcon>
 
 </ResourceDictionary>
