@@ -39,6 +39,36 @@ namespace TimeTrackR
         }
 
         /// <summary>
+        /// Starts the timer
+        /// </summary>
+        public ICommand StartTimerCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => _timer.State == Timer.States.Stopped,
+                    CommandAction = () => _timer.Start()
+                };
+            }
+        }
+
+        /// <summary>
+        /// Stops the timer
+        /// </summary>
+        public ICommand StopTimerCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => _timer.State == Timer.States.Started,
+                    CommandAction = () => _timer.Stop()
+                };
+            }
+        }
+
+        /// <summary>
         /// Shuts down the application.
         /// </summary>
         public ICommand ExitApplicationCommand

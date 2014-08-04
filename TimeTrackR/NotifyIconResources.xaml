@@ -6,6 +6,8 @@
     <tb:TaskbarIcon x:Key="SysTrayNotifyIcon" IconSource="/Resources/SystemTray.ico" ToolTipText="TimeTrackR">
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
+                <MenuItem Header="Start" Command="{Binding StartTimerCommand}"/>
+                <MenuItem Header="Stop" Command="{Binding StopTimerCommand}"/>
                 <MenuItem Header="Options" Command="{Binding ShowWindowCommand}"/>
                 <MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}"/>
             </ContextMenu>
