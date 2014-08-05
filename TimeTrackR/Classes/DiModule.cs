@@ -1,4 +1,5 @@
-﻿using TimeTrackR.Core.Timer;
+﻿using TimeTrackR.Core.Tags;
+using TimeTrackR.Core.Timer;
 
 namespace TimeTrackR.Classes
 {
@@ -6,8 +7,9 @@ namespace TimeTrackR.Classes
     {
         public override void Load()
         {
-            Bind<Timer>().To<Timer>();
-            Bind<NotifyIconViewModel>().To<NotifyIconViewModel>();
+            Bind<Timer>().To<Timer>().InSingletonScope();
+            Bind<ITagSetProvider>().To<TagSetProvider>().InSingletonScope();
+            Bind<NotifyIconViewModel>().To<NotifyIconViewModel>().InSingletonScope();
         }
     }
 }

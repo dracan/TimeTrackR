@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TimeTrackR.Core.Tags;
 
 namespace TimeTrackR.Core.Timer
 {
     public class Timer
     {
+        private readonly ITagSetProvider _tagSetProvider;
+
         public enum States
         {
             Stopped,
@@ -22,8 +25,10 @@ namespace TimeTrackR.Core.Timer
             get { return new TimeSpan(_historyItems.Sum(x => x.Length.Ticks)); }
         }
 
-        public Timer()
+        public Timer(ITagSetProvider tagSetProvider)
         {
+            _tagSetProvider = tagSetProvider;
+
             Reset();
         }
 
@@ -42,7 +47,7 @@ namespace TimeTrackR.Core.Timer
 
             State = States.Started;
 
-            _currentHistoryItem = new TimerHistoryItem { Start = DateTime.Now };
+            _currentHistoryItem = new TimerHistoryItem { Start = DateTime.Now, TagSet = _tagSetProvider.GetCurrentTagSet()};
         }
 
         public void Stop()

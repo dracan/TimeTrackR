@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 
 namespace TimeTrackR
@@ -14,10 +15,12 @@ namespace TimeTrackR
     public class NotifyIconViewModel : INotifyPropertyChanged
     {
         public Timer Timer { get; set; }
+        public ITagSetProvider TagSetProvider { get; set; }
 
-        public NotifyIconViewModel(Timer timer)
+        public NotifyIconViewModel(Timer timer, ITagSetProvider tagSetProvider)
         {
             Timer = timer;
+            TagSetProvider = tagSetProvider;
         }
 
         /// <summary>

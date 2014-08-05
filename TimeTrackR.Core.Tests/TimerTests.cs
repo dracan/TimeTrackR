@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using NUnit.Framework;
+using TimeTrackR.Core.Tags;
 
 namespace TimeTrackR.Core.Tests
 {
@@ -9,14 +10,14 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void InitialTimerStateIsStopped()
         {
-            var timer = new Timer.Timer();
+            var timer = new Timer.Timer(new TagSetProvider());
             Assert.That(timer.State == Timer.Timer.States.Stopped);
         }
 
         [Test]
         public void TimerStateIsStartedAfterStart()
         {
-            var timer = new Timer.Timer();
+            var timer = new Timer.Timer(new TagSetProvider());
             timer.Start();
             Assert.That(timer.State == Timer.Timer.States.Started);
         }
@@ -24,7 +25,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void TimerStateIsStoppedAfterStop()
         {
-            var timer = new Timer.Timer();
+            var timer = new Timer.Timer(new TagSetProvider());
             timer.Start();
             timer.Stop();
             Assert.That(timer.State == Timer.Timer.States.Stopped);
@@ -33,7 +34,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void FiveSecondSimpleTest()
         {
-            var timer = new Timer.Timer();
+            var timer = new Timer.Timer(new TagSetProvider());
             timer.Start();
             Thread.Sleep(5000);
             timer.Stop();
@@ -44,7 +45,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void FiveSecondSimpleTestWithThreeSecondPause()
         {
-            var timer = new Timer.Timer();
+            var timer = new Timer.Timer(new TagSetProvider());
             timer.Start();
             Thread.Sleep(2500);
             timer.Stop();
@@ -59,7 +60,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void EnsureResetResetsTotalTime()
         {
-            var timer = new Timer.Timer();
+            var timer = new Timer.Timer(new TagSetProvider());
             timer.Start();
             Thread.Sleep(500);
             timer.Stop();
@@ -71,7 +72,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void EnsureResetResetsState()
         {
-            var timer = new Timer.Timer();
+            var timer = new Timer.Timer(new TagSetProvider());
             timer.Start();
             timer.Stop();
             timer.Reset();
