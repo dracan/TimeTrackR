@@ -9,6 +9,7 @@
                 <MenuItem Header="Start" Command="{Binding StartTimerCommand}"/>
                 <MenuItem Header="Stop" Command="{Binding StopTimerCommand}"/>
                 <MenuItem Header="Options" Command="{Binding ShowWindowCommand}"/>
+                <MenuItem Header="Set Current Tags" Command="{Binding SetCurrentTagsCommand}"/>
                 <MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}"/>
             </ContextMenu>
         </tb:TaskbarIcon.ContextMenu>

@@ -42,6 +42,22 @@ namespace TimeTrackR
             }
         }
 
+        public ICommand SetCurrentTagsCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => true,
+                    CommandAction = () =>
+                                    {
+                                        var window = new TagSelection(Timer, TagSetProvider);
+                                        window.Show();
+                                    }
+                };
+            }
+        }
+
         /// <summary>
         /// Starts the timer
         /// </summary>

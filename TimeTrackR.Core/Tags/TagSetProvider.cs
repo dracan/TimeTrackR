@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TimeTrackR.Core.Tags
 {
@@ -11,7 +12,7 @@ namespace TimeTrackR.Core.Tags
             _tags.Add(tag);
         }
 
-        public void Empty()
+        public void Clear()
         {
             _tags.Clear();
         }
@@ -19,6 +20,17 @@ namespace TimeTrackR.Core.Tags
         public IEnumerable<Tag> GetCurrentTagSet()
         {
             return _tags;
+        }
+
+        public void AddFromDelimitedString(string delimitedString)
+        {
+            var entries = (from x in delimitedString.Split(',')
+                           select x.Trim()).ToList();
+
+            foreach(var entry in entries)
+            {
+                AddTag(new Tag {Name = entry});
+            }
         }
     }
 }

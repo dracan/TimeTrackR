@@ -17,12 +17,12 @@ namespace TimeTrackR.Core.Timer
 
         public States State { get; set; }
 
-        private List<TimerHistoryItem> _historyItems;
+        public List<TimerHistoryItem> HistoryItems;
         private TimerHistoryItem _currentHistoryItem;
 
         public TimeSpan TotalTime
         {
-            get { return new TimeSpan(_historyItems.Sum(x => x.Length.Ticks)); }
+            get { return new TimeSpan(HistoryItems.Sum(x => x.Length.Ticks)); }
         }
 
         public Timer(ITagSetProvider tagSetProvider)
@@ -35,7 +35,7 @@ namespace TimeTrackR.Core.Timer
         public void Reset()
         {
             State = States.Stopped;
-            _historyItems = new List<TimerHistoryItem>();
+            HistoryItems = new List<TimerHistoryItem>();
         }
 
         public void Start()
@@ -61,7 +61,7 @@ namespace TimeTrackR.Core.Timer
 
             _currentHistoryItem.End = DateTime.Now;
 
-            _historyItems.Add(_currentHistoryItem);
+            HistoryItems.Add(_currentHistoryItem);
             _currentHistoryItem = null;
         }
     }

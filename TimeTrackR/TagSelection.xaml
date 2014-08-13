@@ -1,0 +1,20 @@
+﻿<Window x:Class="TimeTrackR.TagSelection"
+        x:Name="wndTagSelection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TagSelection" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <TextBox Name="TextBoxTagEntry" />
+            <Button Name="ButtonOkay" Click="ButtonOkay_OnClick">Okay</Button> <!-- (low) Pressing enter on the textbox needs to be able to press this button -->
+            <ListBox ItemsSource="{Binding ElementName=wndTagSelection, Path=Items}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding TagsAsString}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
