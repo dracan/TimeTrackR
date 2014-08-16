@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TimeTrackR
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for OptionsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class OptionsWindow : Window
     {
-        public MainWindow()
+        public OptionsWindow()
         {
             InitializeComponent();
         }

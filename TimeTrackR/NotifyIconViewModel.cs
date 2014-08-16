@@ -26,7 +26,7 @@ namespace TimeTrackR
         /// <summary>
         /// Shows a window, if none is already open.
         /// </summary>
-        public ICommand ShowWindowCommand
+        public ICommand ShowOptionsWindowCommand
         {
             get
             {
@@ -35,7 +35,7 @@ namespace TimeTrackR
                     CanExecuteFunc = () => Application.Current.MainWindow == null,
                     CommandAction = () =>
                     {
-                        Application.Current.MainWindow = new MainWindow();
+                        Application.Current.MainWindow = new OptionsWindow();
                         Application.Current.MainWindow.Show();
                     }
                 };

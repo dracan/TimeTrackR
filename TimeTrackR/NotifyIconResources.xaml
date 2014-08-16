@@ -8,7 +8,7 @@
             <ContextMenu>
                 <MenuItem Header="Start" Command="{Binding StartTimerCommand}"/>
                 <MenuItem Header="Stop" Command="{Binding StopTimerCommand}"/>
-                <MenuItem Header="Options" Command="{Binding ShowWindowCommand}"/>
+                <MenuItem Header="Options" Command="{Binding ShowOptionsWindowCommand}"/>
                 <MenuItem Header="Set Current Tags" Command="{Binding SetCurrentTagsCommand}"/>
                 <MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}"/>
             </ContextMenu>
