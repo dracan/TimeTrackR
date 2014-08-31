@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 
@@ -16,11 +17,45 @@ namespace TimeTrackR
     {
         public Timer Timer { get; set; }
         public ITagSetProvider TagSetProvider { get; set; }
+        public IHotKeyRegisterCallback HotKeyRegisterCallback { get; set; }
 
-        public NotifyIconViewModel(Timer timer, ITagSetProvider tagSetProvider)
+        public NotifyIconViewModel(Timer timer, ITagSetProvider tagSetProvider, IHotKeyRegisterCallback hotKeyRegisterCallback)
         {
             Timer = timer;
             TagSetProvider = tagSetProvider;
+            HotKeyRegisterCallback = hotKeyRegisterCallback;
+
+            RegisterHotkeys();
+        }
+
+        private void RegisterHotkeys()
+        {
+            HotKeyRegisterCallback.SetCallback(HotkeyActions.StartTimer, StartTimer);
+            HotKeyRegisterCallback.SetCallback(HotkeyActions.StopTimer, StopTimer);
+            HotKeyRegisterCallback.SetCallback(HotkeyActions.SetTags, SetTags);
+        }
+
+        private void StartTimer()
+        {
+            if(Timer.State == Timer.States.Stopped)
+            {
+                Timer.Start();
+            }
+        }
+
+        private void StopTimer()
+        {
+            if(Timer.State == Timer.States.Started)
+            {
+                Timer.Stop();
+                OnPropertyChanged("Timer");
+            }
+        }
+
+        private void SetTags()
+        {
+            var window = new TagSelection(Timer, TagSetProvider);
+            window.Show();
         }
 
         /// <summary>
@@ -49,11 +84,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => true,
-                    CommandAction = () =>
-                                    {
-                                        var window = new TagSelection(Timer, TagSetProvider);
-                                        window.Show();
-                                    }
+                    CommandAction = () => SetTags()
                 };
             }
         }
@@ -68,7 +99,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => Timer.State == Timer.States.Stopped,
-                    CommandAction = () => Timer.Start()
+                    CommandAction = () => StartTimer()
                 };
             }
         }
@@ -83,11 +114,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => Timer.State == Timer.States.Started,
-                    CommandAction = () =>
-                                    {
-                                        Timer.Stop();
-                                        OnPropertyChanged("Timer");
-                                    }
+                    CommandAction = () => StopTimer()
                 };
             }
         }

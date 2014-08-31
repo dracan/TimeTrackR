@@ -2,7 +2,7 @@
 using Hardcodet.Wpf.TaskbarNotification;
 using Ninject;
 using TimeTrackR.Classes;
-using TimeTrackR.Core.Tags;
+using TimeTrackR.Core.Hotkeys;
 
 namespace TimeTrackR
 {
