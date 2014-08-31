@@ -2,7 +2,7 @@
 using Hardcodet.Wpf.TaskbarNotification;
 using Ninject;
 using TimeTrackR.Classes;
-using TimeTrackR.Core.Tags;
+using TimeTrackR.Core.Hotkeys;
 
 namespace TimeTrackR
 {
@@ -20,6 +20,8 @@ namespace TimeTrackR
             IKernel kernel = new StandardKernel(new DiModule());
 
             var viewModel = kernel.Get<NotifyIconViewModel>();
+
+            HotkeyManager.Init();
 
             // Create the notifyicon (it's a resource declared in NotifyIconResources.xaml)
             notifyIcon = (TaskbarIcon)FindResource("SysTrayNotifyIcon");

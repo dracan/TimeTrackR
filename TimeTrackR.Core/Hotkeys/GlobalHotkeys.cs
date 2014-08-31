@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Interop;
 
-namespace TimeTrackR.Core
+namespace TimeTrackR.Core.Hotkeys
 {
-    /// <summary> This class allows you to manage a hotkey. Code has been pinched from http://www.pinvoke.net/default.aspx/user32/RegisterHotKey.html</summary>
+    /// <summary> This class allows you to manage a hotkey. Code has been pinched from http://www.pinvoke.net/default.aspx/user32/RegisterHotKey.html</summary>, and tweaked a bit.
     public class GlobalHotkeys : IDisposable
     {
         [DllImport("user32", SetLastError = true)]
@@ -15,9 +15,9 @@ namespace TimeTrackR.Core
         [DllImport("user32", SetLastError = true)]
         public static extern int UnregisterHotKey(IntPtr hwnd, int id);
         [DllImport("kernel32", SetLastError = true)]
-        public static extern short GlobalAddAtom(string lpString);
+        public static extern ushort GlobalAddAtom(string lpString);
         [DllImport("kernel32", SetLastError = true)]
-        public static extern short GlobalDeleteAtom(short nAtom);
+        public static extern ushort GlobalDeleteAtom(ushort nAtom);
 
         public const int MOD_ALT = 1;
         public const int MOD_CONTROL = 2;
@@ -26,16 +26,34 @@ namespace TimeTrackR.Core
 
         public const int WM_HOTKEY = 0x312;
 
+        private static ushort _nextHotkeyHandleAtomSeed;
+
         public GlobalHotkeys()
         {
-            Handle = Process.GetCurrentProcess().Handle;
+            //Handle = Process.GetCurrentProcess().Handle;
+            Handle = IntPtr.Zero;
+        }
+
+        public GlobalHotkeys(int hotkey, int modifiers, ThreadMessageEventHandler callback)
+        {
+            //Handle = Process.GetCurrentProcess().Handle;
+            Handle = IntPtr.Zero;
+
+            Callback = callback;
+
+            RegisterGlobalHotKey(hotkey, modifiers);
         }
 
         /// <summary>Handle of the current process</summary>
         public IntPtr Handle;
 
         /// <summary>The ID for the hotkey</summary>
-        public short HotkeyID { get; private set; }
+        public ushort HotkeyID { get; private set; }
+
+        /// <summary>
+        /// Holds an event handler that gets called when this hotkey is pressed
+        /// </summary>
+        public ThreadMessageEventHandler Callback { get; set; }
 
         /// <summary>Register the hotkey</summary>
         public void RegisterGlobalHotKey(int hotkey, int modifiers, IntPtr handle)
@@ -53,20 +71,26 @@ namespace TimeTrackR.Core
             try
             {
                 // use the GlobalAddAtom API to get a unique ID (as suggested by MSDN)
-                string atomName = Thread.CurrentThread.ManagedThreadId.ToString("X8") + GetType().FullName;
+                var atomName = Thread.CurrentThread.ManagedThreadId.ToString("X8") + GetType().FullName + (_nextHotkeyHandleAtomSeed++);
+
                 HotkeyID = GlobalAddAtom(atomName);
+
                 if(HotkeyID == 0)
+                {
                     throw new Exception("Unable to generate unique hotkey ID. Error: " + Marshal.GetLastWin32Error().ToString(CultureInfo.InvariantCulture));
+                }
 
                 // register the hotkey, throw if any error
                 if(!RegisterHotKey(Handle, HotkeyID, (uint)modifiers, (uint)hotkey))
+                {
                     throw new Exception("Unable to register hotkey. Error: " + Marshal.GetLastWin32Error().ToString(CultureInfo.InvariantCulture));
+                }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 // clean up if hotkey registration failed
                 Dispose();
-                Console.WriteLine(ex);
+                throw;
             }
         }
 
