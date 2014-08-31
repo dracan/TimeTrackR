@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Windows.Interop;
 
 namespace TimeTrackR.Core.Hotkeys
 {
@@ -34,12 +33,10 @@ namespace TimeTrackR.Core.Hotkeys
             Handle = IntPtr.Zero;
         }
 
-        public GlobalHotkey(int hotkey, int modifiers, ThreadMessageEventHandler callback)
+        public GlobalHotkey(int hotkey, int modifiers)
         {
             //Handle = Process.GetCurrentProcess().Handle;
             Handle = IntPtr.Zero;
-
-            Callback = callback;
 
             RegisterGlobalHotKey(hotkey, modifiers);
         }
@@ -49,11 +46,6 @@ namespace TimeTrackR.Core.Hotkeys
 
         /// <summary>The ID for the hotkey</summary>
         public ushort HotkeyID { get; private set; }
-
-        /// <summary>
-        /// Holds an event handler that gets called when this hotkey is pressed
-        /// </summary>
-        public ThreadMessageEventHandler Callback { get; set; }
 
         /// <summary>Register the hotkey</summary>
         public void RegisterGlobalHotKey(int hotkey, int modifiers, IntPtr handle)

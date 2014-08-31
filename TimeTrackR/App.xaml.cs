@@ -21,8 +21,6 @@ namespace TimeTrackR
 
             var viewModel = kernel.Get<NotifyIconViewModel>();
 
-            HotkeyManager.Init();
-
             // Create the notifyicon (it's a resource declared in NotifyIconResources.xaml)
             notifyIcon = (TaskbarIcon)FindResource("SysTrayNotifyIcon");
 

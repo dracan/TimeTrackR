@@ -1,4 +1,5 @@
-﻿using TimeTrackR.Core.Tags;
+﻿using TimeTrackR.Core.Hotkeys;
+using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 
 namespace TimeTrackR.Classes
@@ -10,6 +11,7 @@ namespace TimeTrackR.Classes
             Bind<Timer>().To<Timer>().InSingletonScope();
             Bind<ITagSetProvider>().To<TagSetProvider>().InSingletonScope();
             Bind<NotifyIconViewModel>().To<NotifyIconViewModel>().InSingletonScope();
+            Bind<IHotKeyRegisterCallback>().To<HotkeyManager>().InSingletonScope();
         }
     }
 }
