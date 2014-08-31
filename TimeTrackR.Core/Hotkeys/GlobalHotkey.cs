@@ -7,7 +7,7 @@ using System.Windows.Interop;
 namespace TimeTrackR.Core.Hotkeys
 {
     /// <summary> This class allows you to manage a hotkey. Code has been pinched from http://www.pinvoke.net/default.aspx/user32/RegisterHotKey.html</summary>, and tweaked a bit.
-    public class GlobalHotkeys : IDisposable
+    public class GlobalHotkey : IDisposable
     {
         [DllImport("user32", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -28,13 +28,13 @@ namespace TimeTrackR.Core.Hotkeys
 
         private static ushort _nextHotkeyHandleAtomSeed;
 
-        public GlobalHotkeys()
+        public GlobalHotkey()
         {
             //Handle = Process.GetCurrentProcess().Handle;
             Handle = IntPtr.Zero;
         }
 
-        public GlobalHotkeys(int hotkey, int modifiers, ThreadMessageEventHandler callback)
+        public GlobalHotkey(int hotkey, int modifiers, ThreadMessageEventHandler callback)
         {
             //Handle = Process.GetCurrentProcess().Handle;
             Handle = IntPtr.Zero;

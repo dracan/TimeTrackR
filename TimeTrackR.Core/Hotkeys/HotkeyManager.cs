@@ -7,13 +7,13 @@ namespace TimeTrackR.Core.Hotkeys
 {
     public static class HotkeyManager
     {
-        private static readonly List<GlobalHotkeys> _hotkeys = new List<GlobalHotkeys>
+        private static readonly List<GlobalHotkey> _hotkeys = new List<GlobalHotkey>
             {
-                new GlobalHotkeys(81 /* q */, GlobalHotkeys.MOD_WIN, (ref MSG msg, ref bool handled) => Debug.WriteLine("Started")),
-                new GlobalHotkeys(87 /* w */, GlobalHotkeys.MOD_WIN, (ref MSG msg, ref bool handled) => Debug.WriteLine("Stopped")),
+                new GlobalHotkey(81 /* q */, GlobalHotkey.MOD_WIN, (ref MSG msg, ref bool handled) => Debug.WriteLine("Started")),
+                new GlobalHotkey(87 /* w */, GlobalHotkey.MOD_WIN, (ref MSG msg, ref bool handled) => Debug.WriteLine("Stopped")),
             };
 
-        private static Dictionary<ushort, GlobalHotkeys> _hotkeyLookup;
+        private static Dictionary<ushort, GlobalHotkey> _hotkeyLookup;
 
         public static void Init()
         {
