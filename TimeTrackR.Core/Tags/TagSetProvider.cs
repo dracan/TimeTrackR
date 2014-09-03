@@ -19,7 +19,7 @@ namespace TimeTrackR.Core.Tags
 
         public IEnumerable<Tag> GetCurrentTagSet()
         {
-            return _tags;
+            return _tags.ToList();
         }
 
         public void AddFromDelimitedString(string delimitedString)
