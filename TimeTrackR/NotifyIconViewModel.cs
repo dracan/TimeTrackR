@@ -58,6 +58,12 @@ namespace TimeTrackR
             window.Show();
         }
 
+        private void ShowReport()
+        {
+            var window = new Report(Timer.HistoryItems);
+            window.Show();
+        }
+
         /// <summary>
         /// Shows a window, if none is already open.
         /// </summary>
@@ -115,6 +121,21 @@ namespace TimeTrackR
                 {
                     CanExecuteFunc = () => Timer.State == Timer.States.Started,
                     CommandAction = () => StopTimer()
+                };
+            }
+        }
+
+        /// <summary>
+        /// Report
+        /// </summary>
+        public ICommand ShowReportWindowCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => true,
+                    CommandAction = () => ShowReport()
                 };
             }
         }
