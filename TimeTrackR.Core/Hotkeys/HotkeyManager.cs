@@ -24,6 +24,11 @@ namespace TimeTrackR.Core.Hotkeys
                     Action = HotkeyActions.SetTags,
                     GlobalHotkey = new GlobalHotkey(65 /* a */, GlobalHotkey.MOD_WIN)
                 },
+                new Hotkey
+                {
+                    Action = HotkeyActions.ShowReportWindow,
+                    GlobalHotkey = new GlobalHotkey(90 /* z */, GlobalHotkey.MOD_WIN)
+                },
             };
 
         private Dictionary<ushort, Hotkey> _hotkeyIDLookup;

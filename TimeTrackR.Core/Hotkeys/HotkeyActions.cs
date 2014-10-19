@@ -4,6 +4,7 @@
     {
         StartTimer,
         StopTimer,
-        SetTags
+        SetTags,
+        ShowReportWindow
     }
 }

@@ -33,6 +33,7 @@ namespace TimeTrackR
             HotKeyRegisterCallback.SetCallback(HotkeyActions.StartTimer, StartTimer);
             HotKeyRegisterCallback.SetCallback(HotkeyActions.StopTimer, StopTimer);
             HotKeyRegisterCallback.SetCallback(HotkeyActions.SetTags, SetTags);
+            HotKeyRegisterCallback.SetCallback(HotkeyActions.ShowReportWindow, ShowReport);
         }
 
         private void StartTimer()
