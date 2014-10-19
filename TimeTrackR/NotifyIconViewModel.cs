@@ -56,7 +56,17 @@ namespace TimeTrackR
         private void SetTags()
         {
             var window = new TagSelection(Timer, TagSetProvider);
-            window.Show();
+            window.ShowDialog();
+
+            if(window.HaveTagsChanged)
+            {
+                if(Timer.State == Timer.States.Started)
+                {
+                    // Restart the timer so that the new tagset is used
+                    Timer.Stop();
+                    Timer.Start();
+                }
+            }
         }
 
         private void ShowReport()
