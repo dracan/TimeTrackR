@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using TimeTrackR.Core.Tags;
@@ -6,13 +7,30 @@ using TimeTrackR.Core.Timer;
 
 namespace TimeTrackR
 {
-    public class TagSetListItem
+    public class TagSetListItem : IEquatable<TagSetListItem>
     {
         public IEnumerable<string> Tags { get; set; }
 
         public string TagsAsString
         {
             get { return string.Join(", ", Tags); }
+        }
+
+        public bool Equals(TagSetListItem other)
+        {
+            // Check whether the compared object is null
+            if(ReferenceEquals(other, null)) return false;
+
+            // Check whether the compared object references the same data
+            if(ReferenceEquals(this, other)) return true;
+
+            // Check whether the objects' properties are equal
+            return TagsAsString.Equals(other.TagsAsString);
+        }
+
+        public override int GetHashCode()
+        {
+            return TagsAsString.GetHashCode();
         }
     }
 
@@ -44,7 +62,7 @@ namespace TimeTrackR
                      select new TagSetListItem
                             {
                                 Tags = x.TagSet.Select(t => t.Name).ToList()
-                            }).Distinct().ToList(); //(medium) This distinct doesn't work, as we need to compare the tags within the instances. Need to Google how to do this. Perhaps adding an Equals overload to the TagSetListItem class, or something like that?
+                            }).Distinct().ToList();
         }
 
         private void ButtonOkay_OnClick(object sender, RoutedEventArgs e)
