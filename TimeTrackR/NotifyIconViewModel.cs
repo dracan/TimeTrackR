@@ -41,6 +41,7 @@ namespace TimeTrackR
             if(Timer.State == Timer.States.Stopped)
             {
                 Timer.Start();
+                OnPropertyChanged("SystemTrayIcon");
             }
         }
 
@@ -49,8 +50,14 @@ namespace TimeTrackR
             if(Timer.State == Timer.States.Started)
             {
                 Timer.Stop();
+                OnPropertyChanged("SystemTrayIcon");
                 OnPropertyChanged("Timer");
             }
+        }
+
+        public string SystemTrayIcon
+        {
+            get { return Timer.State == Timer.States.Started ? "/Resources/button_red_record.ico" : "/Resources/button_grey_record.ico"; }
         }
 
         private void SetTags()
