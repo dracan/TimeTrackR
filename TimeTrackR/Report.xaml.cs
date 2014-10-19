@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using TimeTrackR.Core.Timer;
 
@@ -16,6 +17,9 @@ namespace TimeTrackR
             HistoryItems = historyItems;
 
             InitializeComponent();
+
+            DateTimePickerStart.Value = DateTime.Today;
+            DateTimePickerEnd.Value = DateTime.Now;
         }
     }
 }
