@@ -29,7 +29,10 @@ namespace TimeTrackR.Core.Tags
 
             foreach(var entry in entries)
             {
-                AddTag(new Tag {Name = entry});
+                if(!string.IsNullOrEmpty(entry))
+                {
+                    AddTag(new Tag {Name = entry});
+                }
             }
         }
     }
