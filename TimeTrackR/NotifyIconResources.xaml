@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:tb="http://www.hardcodet.net/taskbar" xmlns:local="clr-namespace:TimeTrackR">
+                    xmlns:tb="http://www.hardcodet.net/taskbar" xmlns:local="clr-namespace:TimeTrackR"
+                    xmlns:Converters="clr-namespace:TimeTrackR.Converters">
 
     <!-- Globally declared notify icon -->
     <tb:TaskbarIcon x:Key="SysTrayNotifyIcon" IconSource="{Binding SystemTrayIcon}" ToolTipText="TimeTrackR">
@@ -22,7 +23,20 @@
               Opacity="1.0"
               Width="160"
               Height="40">
-                <TextBlock Text="{Binding Timer.TotalTime, StringFormat={}{0:g}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Grid>
+                    <Grid.Resources>
+                        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+                        <Converters:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter" />
+                    </Grid.Resources>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{Binding Timer.HasTags, Converter={StaticResource BoolToGridLengthConverter}}" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding Timer.TagsAsString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Timer.HasTags, Converter={StaticResource BoolToVisConverter}}" />
+                    <TextBlock Grid.Row="1" Text="{Binding Timer.TotalTime, StringFormat={}{0:hh\\h\\ mm\\m\\ ss\\s}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
             </Border>
         </tb:TaskbarIcon.TrayToolTip>
     </tb:TaskbarIcon>

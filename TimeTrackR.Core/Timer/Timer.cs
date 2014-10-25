@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using TimeTrackR.Core.Annotations;
 using TimeTrackR.Core.Tags;
 
 namespace TimeTrackR.Core.Timer
 {
-    public class Timer
+    public class Timer : INotifyPropertyChanged
     {
         private readonly ITagSetProvider _tagSetProvider;
 
@@ -25,9 +28,25 @@ namespace TimeTrackR.Core.Timer
             get { return new TimeSpan(HistoryItems.Sum(x => x.Length.Ticks)); }
         }
 
+        public string TagsAsString
+        {
+            get { return string.Join(", ", _tagSetProvider.GetCurrentTagSet().Select(t => t.Name)); }
+        }
+
+        public bool HasTags
+        {
+            get { return _tagSetProvider.GetCurrentTagSet().Any(); }
+        }
+
         public Timer(ITagSetProvider tagSetProvider)
         {
             _tagSetProvider = tagSetProvider;
+
+            _tagSetProvider.OnTagChanged += (sender, args) =>
+                                            {
+                                                OnPropertyChanged("TagsAsString");
+                                                OnPropertyChanged("HasTags");
+                                            };
 
             Reset();
         }
@@ -63,6 +82,15 @@ namespace TimeTrackR.Core.Timer
 
             HistoryItems.Add(_currentHistoryItem);
             _currentHistoryItem = null;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if(handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

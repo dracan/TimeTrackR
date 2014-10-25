@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,14 +8,26 @@ namespace TimeTrackR.Core.Tags
     {
         private readonly IList<Tag> _tags = new List<Tag>();
 
+        public EventHandler OnTagChanged { get; set; }
+
         public void AddTag(Tag tag)
         {
             _tags.Add(tag);
+
+            if(OnTagChanged != null)
+            {
+                OnTagChanged(this, new EventArgs());
+            }
         }
 
         public void Clear()
         {
             _tags.Clear();
+
+            if(OnTagChanged != null)
+            {
+                OnTagChanged(this, new EventArgs());
+            }
         }
 
         public IEnumerable<Tag> GetCurrentTagSet()

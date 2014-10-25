@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TimeTrackR.Core.Tags
 {
@@ -9,5 +10,7 @@ namespace TimeTrackR.Core.Tags
         void AddFromDelimitedString(string delimitedString);
 
         IEnumerable<Tag> GetCurrentTagSet();
+
+        EventHandler OnTagChanged { get; set; }
     }
 }
