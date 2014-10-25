@@ -48,6 +48,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Tags\ITagSetProvider.cs" />
     <Compile Include="Tags\Tag.cs" />
+    <Compile Include="Tags\TagSetListItem.cs" />
     <Compile Include="Tags\TagSetProvider.cs" />
     <Compile Include="Timer\Timer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
