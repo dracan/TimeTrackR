@@ -33,6 +33,7 @@ namespace TimeTrackR
             HotKeyRegisterCallback.SetCallback(HotkeyActions.StartTimer, StartTimer);
             HotKeyRegisterCallback.SetCallback(HotkeyActions.StopTimer, StopTimer);
             HotKeyRegisterCallback.SetCallback(HotkeyActions.SetTags, SetTags);
+            HotKeyRegisterCallback.SetCallback(HotkeyActions.ShowReportWindow, ShowReport);
         }
 
         private void StartTimer()
@@ -73,6 +74,12 @@ namespace TimeTrackR
                     Timer.Start();
                 }
             }
+        }
+
+        private void ShowReport()
+        {
+            var window = new Report(Timer.HistoryItems);
+            window.Show();
         }
 
         /// <summary>
@@ -132,6 +139,21 @@ namespace TimeTrackR
                 {
                     CanExecuteFunc = () => Timer.State == Timer.States.Started,
                     CommandAction = () => StopTimer()
+                };
+            }
+        }
+
+        /// <summary>
+        /// Report
+        /// </summary>
+        public ICommand ShowReportWindowCommand
+        {
+            get
+            {
+                return new DelegateCommand
+                {
+                    CanExecuteFunc = () => true,
+                    CommandAction = () => ShowReport()
                 };
             }
         }

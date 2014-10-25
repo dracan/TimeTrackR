@@ -10,6 +10,7 @@
                 <MenuItem Header="Start" Command="{Binding StartTimerCommand}"/>
                 <MenuItem Header="Stop" Command="{Binding StopTimerCommand}"/>
                 <MenuItem Header="Options" Command="{Binding ShowOptionsWindowCommand}"/>
+                <MenuItem Header="Report" Command="{Binding ShowReportWindowCommand}"/>
                 <MenuItem Header="Set Current Tags" Command="{Binding SetCurrentTagsCommand}"/>
                 <MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}"/>
             </ContextMenu>
