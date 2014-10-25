@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using TimeTrackR.Core.Timer;
 
 namespace TimeTrackR
@@ -20,6 +21,16 @@ namespace TimeTrackR
 
             DateTimePickerStart.Value = DateTime.Today;
             DateTimePickerEnd.Value = DateTime.Now;
+
+            PreviewKeyDown += OnKeyDown;
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
     }
 }

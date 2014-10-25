@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 
@@ -27,6 +28,8 @@ namespace TimeTrackR
             InitializeComponent();
 
             TextBoxTagEntry.Focus();
+
+            PreviewKeyDown += OnKeyDown;
         }
 
         private void InitialiseItems()
@@ -50,6 +53,14 @@ namespace TimeTrackR
             HaveTagsChanged = oldTagSetAsString != newTagSetAsString;
 
             Close();
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
     }
 }
