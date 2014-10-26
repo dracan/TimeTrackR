@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using TimeTrackR.Core.Timer;
 
 namespace TimeTrackR
 {
@@ -11,16 +8,9 @@ namespace TimeTrackR
     /// </summary>
     public partial class Report : Window
     {
-        public IList<TimerHistoryItem> HistoryItems { get; set; }
-
-        public Report(IList<TimerHistoryItem> historyItems)
+        public Report()
         {
-            HistoryItems = historyItems;
-
             InitializeComponent();
-
-            DateTimePickerStart.Value = DateTime.Today;
-            DateTimePickerEnd.Value = DateTime.Now;
 
             PreviewKeyDown += OnKeyDown;
         }

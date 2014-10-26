@@ -1,14 +1,19 @@
 ﻿<Window x:Class="TimeTrackR.TagSelection"
-        x:Name="wndTagSelection"
+        x:Name="TagSelectionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="TagSelection" Height="300" Width="400"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ViewModels="clr-namespace:TimeTrackR.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance ViewModels:TagSelectionViewModel}"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
-            <TextBox Name="TextBoxTagEntry" />
-            <Button Name="ButtonOkay" Click="ButtonOkay_OnClick" IsDefault="True">Okay</Button>
-            <ListBox ItemsSource="{Binding ElementName=wndTagSelection, Path=Items}">
+            <TextBox Name="TextBoxTagEntry" Text="{Binding TagsAsDelimitedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Name="ButtonOkay" Command="{Binding OkayCommand}" CommandParameter="{Binding ElementName=TagSelectionWindow}" IsDefault="True">Okay</Button>
+            <ListBox ItemsSource="{Binding Items}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding TagsAsString}" />

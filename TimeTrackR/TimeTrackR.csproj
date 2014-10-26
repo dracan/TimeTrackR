@@ -81,12 +81,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
     <Compile Include="TagSelection.xaml.cs">
       <DependentUpon>TagSelection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\TagSelectionViewModel.cs" />
     <Page Include="OptionsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,7 +117,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NotifyIconViewModel.cs" />
+    <Compile Include="ViewModels\NotifyIconViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

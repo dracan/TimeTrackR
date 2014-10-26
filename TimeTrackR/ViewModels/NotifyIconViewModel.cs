@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 
-namespace TimeTrackR
+namespace TimeTrackR.ViewModels
 {
     /// <summary>
     /// Provides bindable properties and commands for the NotifyIcon. In this sample, the
@@ -62,10 +61,11 @@ namespace TimeTrackR
 
         private void SetTags()
         {
-            var window = new TagSelection(Timer, TagSetProvider);
+            var viewModel = new TagSelectionViewModel(Timer, TagSetProvider);
+            var window = new TagSelection {DataContext = viewModel};
             window.ShowDialog();
 
-            if(window.HaveTagsChanged)
+            if(viewModel.HaveTagsChanged)
             {
                 if(Timer.State == Timer.States.Started)
                 {
@@ -78,7 +78,7 @@ namespace TimeTrackR
 
         private void ShowReport()
         {
-            var window = new Report(Timer.HistoryItems);
+            var window = new Report { DataContext = new ReportViewModel(Timer.HistoryItems) };
             window.Show();
         }
 
@@ -92,7 +92,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => Application.Current.MainWindow == null,
-                    CommandAction = () =>
+                    CommandAction = o =>
                     {
                         Application.Current.MainWindow = new OptionsWindow();
                         Application.Current.MainWindow.Show();
@@ -108,7 +108,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => true,
-                    CommandAction = () => SetTags()
+                    CommandAction = o => SetTags()
                 };
             }
         }
@@ -123,7 +123,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => Timer.State == Timer.States.Stopped,
-                    CommandAction = () => StartTimer()
+                    CommandAction = o => StartTimer()
                 };
             }
         }
@@ -138,7 +138,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => Timer.State == Timer.States.Started,
-                    CommandAction = () => StopTimer()
+                    CommandAction = o => StopTimer()
                 };
             }
         }
@@ -153,7 +153,7 @@ namespace TimeTrackR
                 return new DelegateCommand
                 {
                     CanExecuteFunc = () => true,
-                    CommandAction = () => ShowReport()
+                    CommandAction = o => ShowReport()
                 };
             }
         }
@@ -165,7 +165,7 @@ namespace TimeTrackR
         {
             get
             {
-                return new DelegateCommand {CommandAction = () => Application.Current.Shutdown()};
+                return new DelegateCommand {CommandAction = o => Application.Current.Shutdown()};
             }
         }
 
@@ -175,31 +175,6 @@ namespace TimeTrackR
         {
             var handler = PropertyChanged;
             if(handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    /// <summary>
-    /// Simplistic delegate command for the demo.
-    /// </summary>
-    public class DelegateCommand : ICommand
-    {
-        public Action CommandAction { get; set; }
-        public Func<bool> CanExecuteFunc { get; set; }
-
-        public void Execute(object parameter)
-        {
-            CommandAction();
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return CanExecuteFunc == null  || CanExecuteFunc();
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
+using TimeTrackR.ViewModels;
 
 namespace TimeTrackR.Classes
 {
