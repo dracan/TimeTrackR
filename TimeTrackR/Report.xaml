@@ -26,10 +26,10 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="Start Time" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <xctk:DateTimePicker Grid.Column="1" x:Name="DateTimePickerStart" />
+                <xctk:DateTimePicker Grid.Column="1" x:Name="DateTimePickerStart" Value="{Binding Filter_StartDateTime}" />
 
                 <TextBlock Grid.Column="2" Text="End Time" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <xctk:DateTimePicker Grid.Column="3" x:Name="DateTimePickerEnd" />
+                <xctk:DateTimePicker Grid.Column="3" x:Name="DateTimePickerEnd" Value="{Binding Filter_EndDateTime}" />
             </Grid>
         </Grid>
 

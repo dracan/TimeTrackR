@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR.Core.Tests", "Ti
 		{23E8BF47-740B-430B-A99F-306B9C26FBDE} = {23E8BF47-740B-430B-A99F-306B9C26FBDE}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimerTrackR.Tests", "TimerTrackR.Tests\TimerTrackR.Tests.csproj", "{69D5F404-1611-4BD3-9134-CDF14CD5DDAD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBFBBA04-FD4C-4FDF-BCCF-61785502140B} = {FBFBBA04-FD4C-4FDF-BCCF-61785502140B}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +36,10 @@ Global
 		{DC391782-9568-40AB-B90F-937FE2493AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC391782-9568-40AB-B90F-937FE2493AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC391782-9568-40AB-B90F-937FE2493AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69D5F404-1611-4BD3-9134-CDF14CD5DDAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69D5F404-1611-4BD3-9134-CDF14CD5DDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69D5F404-1611-4BD3-9134-CDF14CD5DDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69D5F404-1611-4BD3-9134-CDF14CD5DDAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
