@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>button_grey_record.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\button_grey_record.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
@@ -150,9 +150,6 @@
       <Project>{23e8bf47-740b-430b-a99f-306b9c26fbde}</Project>
       <Name>TimeTrackR.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="button_grey_record.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\button_grey_record.ico" />
