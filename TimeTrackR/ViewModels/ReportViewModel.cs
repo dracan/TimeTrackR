@@ -18,7 +18,7 @@ namespace TimeTrackR.ViewModels
             get
             {
                 return (from hi in HistoryItems
-                        where hi.Start < Filter_EndDateTime && Filter_StartDateTime < hi.End
+                        where hi.Start <= Filter_EndDateTime && Filter_StartDateTime <= hi.End
                         select hi).ToList();
             }
         }
