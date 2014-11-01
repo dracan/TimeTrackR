@@ -30,7 +30,7 @@ namespace TimeTrackR.Core.Tags
             }
         }
 
-        public IEnumerable<Tag> GetCurrentTagSet()
+        public ICollection<Tag> GetCurrentTagSet()
         {
             return _tags.ToList();
         }

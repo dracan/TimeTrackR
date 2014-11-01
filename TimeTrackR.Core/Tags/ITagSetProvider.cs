@@ -9,7 +9,7 @@ namespace TimeTrackR.Core.Tags
         void Clear();
         void AddFromDelimitedString(string delimitedString);
 
-        IEnumerable<Tag> GetCurrentTagSet();
+        ICollection<Tag> GetCurrentTagSet();
 
         EventHandler OnTagChanged { get; set; }
     }

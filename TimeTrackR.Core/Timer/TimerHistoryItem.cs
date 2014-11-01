@@ -6,9 +6,10 @@ namespace TimeTrackR.Core.Timer
 {
     public class TimerHistoryItem
     {
+        public int id { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public IEnumerable<Tag> Tags { get; set; }
+        public ICollection<Tag> Tags { get; set; }
 
         public TimeSpan Length
         {
