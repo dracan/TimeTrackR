@@ -27,14 +27,9 @@ namespace TimeTrackR.Core.Data
 
         public void UpdateItems(ICollection<TimerHistoryItem> items)
         {
-            var dbContext = _dataContext as DataContext;
-
-            if(dbContext != null)
+            foreach(var item in items)
             {
-                foreach(var item in items)
-                {
-                    UpdateItem(item, false);
-                }
+                UpdateItem(item, false);
             }
         }
 
