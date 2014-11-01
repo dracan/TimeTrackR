@@ -30,7 +30,7 @@ namespace TimeTrackR.ViewModels
                 return _items ?? (_items = (from x in _timer.HistoryItems
                                             select new TagSetListItem
                                                    {
-                                                       Tags = x.TagSet.Select(t => t.Name).ToList()
+                                                       Tags = x.Tags.Select(t => t.Name).ToList()
                                                    }).Distinct().ToList());
             }
         }

@@ -42,7 +42,7 @@
                             <TextBlock>End = <Run Text="{Binding End}" /></TextBlock>
                             <TextBlock>Length = <Run Text="{Binding Length, StringFormat={}{0:hh\\h\\ mm\\m\\ ss\\s}, Mode=OneWay}" /></TextBlock>
 
-                            <ListBox ItemsSource="{Binding TagSet}">
+                            <ListBox ItemsSource="{Binding Tags}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
