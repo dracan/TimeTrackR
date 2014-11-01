@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using TimeTrackR.Core.Data;
 using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
+using System.Linq;
 
 namespace TimeTrackR.ViewModels
 {
@@ -17,12 +19,14 @@ namespace TimeTrackR.ViewModels
         public Timer Timer { get; set; }
         public ITagSetProvider TagSetProvider { get; set; }
         public IHotKeyRegisterCallback HotKeyRegisterCallback { get; set; }
+        private readonly TimerHistoryItemRepository _repository;
 
-        public NotifyIconViewModel(Timer timer, ITagSetProvider tagSetProvider, IHotKeyRegisterCallback hotKeyRegisterCallback)
+        public NotifyIconViewModel(Timer timer, ITagSetProvider tagSetProvider, IHotKeyRegisterCallback hotKeyRegisterCallback, TimerHistoryItemRepository repository)
         {
             Timer = timer;
             TagSetProvider = tagSetProvider;
             HotKeyRegisterCallback = hotKeyRegisterCallback;
+            _repository = repository;
 
             RegisterHotkeys();
         }
@@ -51,6 +55,8 @@ namespace TimeTrackR.ViewModels
                 Timer.Stop();
                 OnPropertyChanged("SystemTrayIcon");
                 OnPropertyChanged("Timer");
+
+                _repository.UpdateItem(Timer.HistoryItems.Last());
             }
         }
 

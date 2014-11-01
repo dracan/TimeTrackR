@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using NUnit.Framework;
+using TimeTrackR.Core.Data;
 using TimeTrackR.Core.Tags;
 
 namespace TimeTrackR.Core.Tests
@@ -7,17 +8,25 @@ namespace TimeTrackR.Core.Tests
     [TestFixture]
     public class TimerTests
     {
+        private IDataContext _dbContext;
+
+        [SetUp]
+        public void Setup()
+        {
+            _dbContext = new FakeDataContext();
+        }
+
         [Test]
         public void InitialTimerStateIsStopped()
         {
-            var timer = new Timer.Timer(new TagSetProvider());
+            var timer = new Timer.Timer(new TagSetProvider(), new TimerHistoryItemRepository(_dbContext));
             Assert.That(timer.State == Timer.Timer.States.Stopped);
         }
 
         [Test]
         public void TimerStateIsStartedAfterStart()
         {
-            var timer = new Timer.Timer(new TagSetProvider());
+            var timer = new Timer.Timer(new TagSetProvider(), new TimerHistoryItemRepository(_dbContext));
             timer.Start();
             Assert.That(timer.State == Timer.Timer.States.Started);
         }
@@ -25,7 +34,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void TimerStateIsStoppedAfterStop()
         {
-            var timer = new Timer.Timer(new TagSetProvider());
+            var timer = new Timer.Timer(new TagSetProvider(), new TimerHistoryItemRepository(_dbContext));
             timer.Start();
             timer.Stop();
             Assert.That(timer.State == Timer.Timer.States.Stopped);
@@ -34,7 +43,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void FiveSecondSimpleTest()
         {
-            var timer = new Timer.Timer(new TagSetProvider());
+            var timer = new Timer.Timer(new TagSetProvider(), new TimerHistoryItemRepository(_dbContext));
             timer.Start();
             Thread.Sleep(5000);
             timer.Stop();
@@ -45,7 +54,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void FiveSecondSimpleTestWithThreeSecondPause()
         {
-            var timer = new Timer.Timer(new TagSetProvider());
+            var timer = new Timer.Timer(new TagSetProvider(), new TimerHistoryItemRepository(_dbContext));
             timer.Start();
             Thread.Sleep(2500);
             timer.Stop();
@@ -60,7 +69,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void EnsureResetResetsTotalTime()
         {
-            var timer = new Timer.Timer(new TagSetProvider());
+            var timer = new Timer.Timer(new TagSetProvider(), new TimerHistoryItemRepository(_dbContext));
             timer.Start();
             Thread.Sleep(500);
             timer.Stop();
@@ -72,7 +81,7 @@ namespace TimeTrackR.Core.Tests
         [Test]
         public void EnsureResetResetsState()
         {
-            var timer = new Timer.Timer(new TagSetProvider());
+            var timer = new Timer.Timer(new TagSetProvider(), new TimerHistoryItemRepository(_dbContext));
             timer.Start();
             timer.Stop();
             timer.Reset();

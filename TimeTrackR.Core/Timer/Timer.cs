@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using TimeTrackR.Core.Annotations;
+using TimeTrackR.Core.Data;
 using TimeTrackR.Core.Tags;
 
 namespace TimeTrackR.Core.Timer
@@ -38,7 +39,7 @@ namespace TimeTrackR.Core.Timer
             get { return _tagSetProvider.GetCurrentTagSet().Any(); }
         }
 
-        public Timer(ITagSetProvider tagSetProvider)
+        public Timer(ITagSetProvider tagSetProvider, TimerHistoryItemRepository historyItemRepository)
         {
             _tagSetProvider = tagSetProvider;
 
@@ -49,6 +50,8 @@ namespace TimeTrackR.Core.Timer
                                             };
 
             Reset();
+
+            HistoryItems = historyItemRepository.ListAll().Where(x => x.Start > DateTime.Today).ToList();
         }
 
         public void Reset()
@@ -66,7 +69,7 @@ namespace TimeTrackR.Core.Timer
 
             State = States.Started;
 
-            _currentHistoryItem = new TimerHistoryItem { Start = DateTime.Now, TagSet = _tagSetProvider.GetCurrentTagSet()};
+            _currentHistoryItem = new TimerHistoryItem { Start = DateTime.Now, Tags = _tagSetProvider.GetCurrentTagSet()};
         }
 
         public void Stop()
