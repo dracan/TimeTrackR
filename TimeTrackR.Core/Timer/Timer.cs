@@ -24,6 +24,10 @@ namespace TimeTrackR.Core.Timer
         public List<TimerHistoryItem> HistoryItems;
         private TimerHistoryItem _currentHistoryItem;
 
+        public delegate void OnStateChangedDelegate(object sender, OnStateChangedEventArgs e);
+
+        public event OnStateChangedDelegate OnStateChanged;
+
         public TimeSpan TotalTime
         {
             get { return new TimeSpan(HistoryItems.Sum(x => x.Length.Ticks)); }
@@ -58,6 +62,11 @@ namespace TimeTrackR.Core.Timer
         {
             State = States.Stopped;
             HistoryItems = new List<TimerHistoryItem>();
+
+            if(OnStateChanged != null)
+            {
+                OnStateChanged(this, new OnStateChangedEventArgs {State = State});
+            }
         }
 
         public void Start()
@@ -70,6 +79,11 @@ namespace TimeTrackR.Core.Timer
             State = States.Started;
 
             _currentHistoryItem = new TimerHistoryItem { Start = DateTime.Now, Tags = _tagSetProvider.GetCurrentTagSet()};
+
+            if(OnStateChanged != null)
+            {
+                OnStateChanged(this, new OnStateChangedEventArgs {State = State});
+            }
         }
 
         public void Stop()
@@ -85,6 +99,11 @@ namespace TimeTrackR.Core.Timer
 
             HistoryItems.Add(_currentHistoryItem);
             _currentHistoryItem = null;
+
+            if(OnStateChanged != null)
+            {
+                OnStateChanged(this, new OnStateChangedEventArgs {State = State});
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

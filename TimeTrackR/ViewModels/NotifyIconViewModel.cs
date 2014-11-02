@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using TimeTrackR.Core.Data;
@@ -6,6 +7,7 @@ using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 using System.Linq;
+using Timer = TimeTrackR.Core.Timer.Timer;
 
 namespace TimeTrackR.ViewModels
 {
@@ -20,6 +22,8 @@ namespace TimeTrackR.ViewModels
         public ITagSetProvider TagSetProvider { get; set; }
         public IHotKeyRegisterCallback HotKeyRegisterCallback { get; set; }
         private readonly TimerHistoryItemRepository _repository;
+        private readonly System.Threading.Timer _autoSaveTimer;
+        private const int AutoSaveTimerDuration = 30000;
 
         public NotifyIconViewModel(Timer timer, ITagSetProvider tagSetProvider, IHotKeyRegisterCallback hotKeyRegisterCallback, TimerHistoryItemRepository repository)
         {
@@ -27,6 +31,10 @@ namespace TimeTrackR.ViewModels
             TagSetProvider = tagSetProvider;
             HotKeyRegisterCallback = hotKeyRegisterCallback;
             _repository = repository;
+
+            _autoSaveTimer = new System.Threading.Timer(AutoSaveTimerCallback);
+
+            Timer.OnStateChanged += TimerOnStateChanged;
 
             RegisterHotkeys();
         }
@@ -55,8 +63,6 @@ namespace TimeTrackR.ViewModels
                 Timer.Stop();
                 OnPropertyChanged("SystemTrayIcon");
                 OnPropertyChanged("Timer");
-
-                _repository.UpdateItem(Timer.HistoryItems.Last());
             }
         }
 
@@ -86,6 +92,39 @@ namespace TimeTrackR.ViewModels
         {
             var window = new Report { DataContext = new ReportViewModel(Timer.HistoryItems) };
             window.Show();
+        }
+
+        private void TimerOnStateChanged(object sender, OnStateChangedEventArgs e)
+        {
+            SaveChanges();
+
+            // If a timer has been started, then set the autosaver timer to save every interval, otherwise disable the timer
+
+            if(e.State == Timer.States.Started)
+            {
+                _autoSaveTimer.Change(AutoSaveTimerDuration, AutoSaveTimerDuration);
+            }
+            else
+            {
+                _autoSaveTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
+        }
+
+        private void AutoSaveTimerCallback(object state)
+        {
+            SaveChanges();
+        }
+
+        private void SaveChanges()
+        {
+            if(Timer.State == Timer.States.Stopped)
+            {
+                _repository.UpdateItem(Timer.HistoryItems.Last());
+            }
+            else
+            {
+                _repository.UpdateItems(Timer.HistoryItems);
+            }
         }
 
         /// <summary>
