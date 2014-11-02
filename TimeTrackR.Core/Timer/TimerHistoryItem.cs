@@ -9,7 +9,7 @@ namespace TimeTrackR.Core.Timer
         public int id { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
 
         public TimeSpan Length
         {
