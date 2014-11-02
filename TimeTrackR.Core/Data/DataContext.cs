@@ -9,6 +9,10 @@ namespace TimeTrackR.Core.Data
         public IDbSet<TimerHistoryItem> TimerHistoryItems { get; set; }
         public IDbSet<Tag> Tags { get; set; }
 
+        public DataContext() : base("data")
+        {
+        }
+
         public new void SaveChanges()
         {
             base.SaveChanges();
