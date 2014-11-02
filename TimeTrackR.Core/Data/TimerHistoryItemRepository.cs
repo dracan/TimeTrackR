@@ -31,6 +31,8 @@ namespace TimeTrackR.Core.Data
             {
                 UpdateItem(item, false);
             }
+
+            _dataContext.SaveChanges();
         }
 
         public void UpdateItem(TimerHistoryItem item)
