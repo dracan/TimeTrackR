@@ -7,6 +7,7 @@ using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 using System.Linq;
+using TimeTrackR.Views;
 using Timer = TimeTrackR.Core.Timer.Timer;
 
 namespace TimeTrackR.ViewModels

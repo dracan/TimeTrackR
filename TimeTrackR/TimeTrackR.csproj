@@ -86,15 +86,15 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
-    <Compile Include="Report.xaml.cs">
+    <Compile Include="Views\Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TagSelection.xaml.cs">
+    <Compile Include="Views\TagSelection.xaml.cs">
       <DependentUpon>TagSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\TagSelectionViewModel.cs" />
-    <Page Include="OptionsWindow.xaml">
+    <Page Include="Views\OptionsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -103,7 +103,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\DiModule.cs" />
-    <Compile Include="OptionsWindow.xaml.cs">
+    <Compile Include="Views\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -111,11 +111,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Report.xaml">
+    <Page Include="Views\Report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TagSelection.xaml">
+    <Page Include="Views\TagSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

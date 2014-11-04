@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace TimeTrackR
+namespace TimeTrackR.Views
 {
     /// <summary>
     /// Interaction logic for Report.xaml
