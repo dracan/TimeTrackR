@@ -28,6 +28,7 @@ namespace TimeTrackR.ViewModels
             get
             {
                 return _items ?? (_items = (from x in _timer.HistoryItems
+                                            where x.Tags.Any()
                                             select new TagSetListItem
                                                    {
                                                        Tags = x.Tags.Select(t => t.Name).ToList()
