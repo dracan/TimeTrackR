@@ -34,27 +34,40 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListBox x:Name="ListBoxHistoryItems" ItemsSource="{Binding FilteredHistoryItems}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock>Start = <Run Text="{Binding Start}" /></TextBlock>
-                            <TextBlock>End = <Run Text="{Binding End}" /></TextBlock>
-                            <TextBlock>Length = <Run Text="{Binding Length, StringFormat={}{0:hh\\h\\ mm\\m\\ ss\\s}, Mode=OneWay}" /></TextBlock>
-
-                            <ListBox ItemsSource="{Binding Tags}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock>Tag = <Run Text="{Binding Name}" /></TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <ListView x:Name="ListBoxHistoryItems" ItemsSource="{Binding FilteredHistoryItems}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Start">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Start, StringFormat={}{0:dd/MM/yy\\ HH\\:mm\\:ss}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="End">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding End, StringFormat={}{0:dd/MM/yy\\ HH\\:mm\\:ss}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Duration">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Length, StringFormat={}{0:hh\\h\\ mm\\m\\ ss\\s}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Tags">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TagsAsDelimitedString}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </Window>
