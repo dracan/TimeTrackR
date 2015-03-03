@@ -8,7 +8,8 @@
         xmlns:ViewModels="clr-namespace:TimeTrackR.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance ViewModels:TagSelectionViewModel}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Topmost="True">
     <Grid>
         <StackPanel>
             <TextBox Name="TextBoxTagEntry" Text="{Binding TagsAsDelimitedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
