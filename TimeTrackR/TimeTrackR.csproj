@@ -86,6 +86,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Helpers\WindowHelpers.cs" />
     <Compile Include="Views\Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>

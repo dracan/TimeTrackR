@@ -7,6 +7,7 @@ using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
 using System.Linq;
+using TimeTrackR.Helpers;
 using TimeTrackR.Views;
 using Timer = TimeTrackR.Core.Timer.Timer;
 
@@ -91,8 +92,17 @@ namespace TimeTrackR.ViewModels
 
         private void ShowReport()
         {
-            var window = new Report { DataContext = new ReportViewModel(Timer.HistoryItems) };
-            window.Show();
+            var existingWindow = WindowHelpers.FindWindow<Report>();
+
+            if(existingWindow == null)
+            {
+                var window = new Report {DataContext = new ReportViewModel(Timer.HistoryItems)};
+                window.Show();
+            }
+            else
+            {
+                existingWindow.Activate();
+            }
         }
 
         private void TimerOnStateChanged(object sender, OnStateChangedEventArgs e)
