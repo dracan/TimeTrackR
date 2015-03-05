@@ -156,3 +156,6 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 *.bak
+
+# For some reason this was getting ignored, although I can't see why from the rules above. Explicitly allowing it, as AppVoyer CI complains it's missing otherwise.
+!/.nuget/nuget.exe
