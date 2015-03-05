@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTrackR", "TimeTrackR\TimeTrackR.csproj", "{FBFBBA04-FD4C-4FDF-BCCF-61785502140B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{23E8BF47-740B-430B-A99F-306B9C26FBDE} = {23E8BF47-740B-430B-A99F-306B9C26FBDE}
@@ -16,6 +18,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimerTrackR.Tests", "TimerTrackR.Tests\TimerTrackR.Tests.csproj", "{69D5F404-1611-4BD3-9134-CDF14CD5DDAD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FBFBBA04-FD4C-4FDF-BCCF-61785502140B} = {FBFBBA04-FD4C-4FDF-BCCF-61785502140B}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FF2F2F1C-EA10-4CD5-8CE9-4748CAB3AECF}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global
