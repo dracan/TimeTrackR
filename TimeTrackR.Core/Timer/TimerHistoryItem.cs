@@ -1,15 +1,58 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using TimeTrackR.Core.Tags;
 
 namespace TimeTrackR.Core.Timer
 {
     public class TimerHistoryItem
     {
-        public int Id { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
+        private int _id;
+        private DateTime _start;
+        private DateTime _end;
+        private ObservableCollection<Tag> _tags;
+
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                Dirty = true;
+            }
+        }
+
+        public DateTime Start
+        {
+            get { return _start; }
+            set
+            {
+                _start = value;
+                Dirty = true;
+            }
+        }
+
+        public DateTime End
+        {
+            get { return _end; }
+            set
+            {
+                _end = value;
+                Dirty = true;
+            }
+        }
+
+        public virtual ObservableCollection<Tag> Tags
+        {
+            get { return _tags; }
+            set
+            {
+                _tags = value;
+                _tags.CollectionChanged += (sender, args) => Dirty = true;
+                Dirty = true;
+            }
+        }
+
+        public bool Dirty = true;
 
         public TimeSpan Length
         {

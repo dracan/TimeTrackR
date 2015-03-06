@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace TimeTrackR.Core.Tags
@@ -30,9 +31,9 @@ namespace TimeTrackR.Core.Tags
             }
         }
 
-        public ICollection<Tag> GetCurrentTagSet()
+        public ObservableCollection<Tag> GetCurrentTagSet()
         {
-            return _tags.ToList();
+            return new ObservableCollection<Tag>(_tags);
         }
 
         public void AddFromDelimitedString(string delimitedString)

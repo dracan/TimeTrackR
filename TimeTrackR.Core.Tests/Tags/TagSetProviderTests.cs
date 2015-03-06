@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using TimeTrackR.Core.Tags;
 
-namespace TimeTrackR.Core.Tests
+namespace TimeTrackR.Core.Tests.Tags
 {
     [TestFixture]
     class TagSetProviderTests

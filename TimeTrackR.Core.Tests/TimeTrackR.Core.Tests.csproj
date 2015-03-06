@@ -58,8 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakeDataContext.cs" />
-    <Compile Include="TagSetProviderTests.cs" />
-    <Compile Include="TimerTests.cs" />
+    <Compile Include="Tags\TagSetProviderTests.cs" />
+    <Compile Include="Timer\TimerHistoryItemTests.cs" />
+    <Compile Include="Timer\TimerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,7 @@
       <Name>TimeTrackR.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

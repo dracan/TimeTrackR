@@ -53,6 +53,8 @@ namespace TimeTrackR.Core.Data
             {
                 _dataContext.SaveChanges();
             }
+
+            item.Dirty = false;
         }
     }
 }

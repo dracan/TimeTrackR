@@ -128,14 +128,7 @@ namespace TimeTrackR.ViewModels
 
         private void SaveChanges()
         {
-            if(Timer.State == Timer.States.Stopped)
-            {
-                _repository.UpdateItem(Timer.HistoryItems.Last());
-            }
-            else
-            {
-                _repository.UpdateItems(Timer.HistoryItems);
-            }
+            _repository.UpdateItems(Timer.HistoryItems.Where(x => x.Dirty).ToList());
         }
 
         /// <summary>
