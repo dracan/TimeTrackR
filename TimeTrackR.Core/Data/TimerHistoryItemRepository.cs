@@ -46,7 +46,7 @@ namespace TimeTrackR.Core.Data
 
             if(dbContext != null)
             {
-                dbContext.Entry(item).State = item.id == 0 ? EntityState.Added : EntityState.Modified;
+                dbContext.Entry(item).State = item.Id == 0 ? EntityState.Added : EntityState.Modified;
             }
 
             if(saveChanges)
