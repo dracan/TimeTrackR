@@ -7,40 +7,23 @@ namespace TimeTrackR.Core.Hotkeys
 {
     public class HotkeyManager : IHotKeyRegisterCallback
     {
-        private readonly List<Hotkey> _hotkeys = new List<Hotkey>
-            {
-                new Hotkey
-                {
-                    Action = HotkeyActions.StartTimer,
-                    GlobalHotkey = new GlobalHotkey(81 /* q */, GlobalHotkey.MOD_WIN)
-                },
-                new Hotkey
-                {
-                    Action = HotkeyActions.StopTimer,
-                    GlobalHotkey = new GlobalHotkey(87 /* w */, GlobalHotkey.MOD_WIN)
-                },
-                new Hotkey
-                {
-                    Action = HotkeyActions.SetTags,
-                    GlobalHotkey = new GlobalHotkey(65 /* a */, GlobalHotkey.MOD_WIN)
-                },
-                new Hotkey
-                {
-                    Action = HotkeyActions.ShowReportWindow,
-                    GlobalHotkey = new GlobalHotkey(90 /* z */, GlobalHotkey.MOD_WIN)
-                },
-            };
+        private readonly HotKeySettings _hotKeySettings;
 
-        private Dictionary<ushort, Hotkey> _hotkeyIDLookup;
+        private Dictionary<ushort, Hotkey> _hotkeyIdLookup;
         private Dictionary<HotkeyActions, Hotkey> _hotkeyActionLookup;
         private bool _initialised;
+
+        public HotkeyManager(HotKeySettings hotKeySettings)
+        {
+            _hotKeySettings = hotKeySettings;
+        }
 
         private void Init()
         {
             _initialised = true;
 
-            _hotkeyIDLookup = _hotkeys.ToDictionary(k => k.GlobalHotkey.HotkeyID, v => v);
-            _hotkeyActionLookup = _hotkeys.ToDictionary(k => k.Action, v => v);
+            _hotkeyIdLookup = _hotKeySettings.HotKeys.ToDictionary(k => k.GlobalHotkey.HotkeyID, v => v);
+            _hotkeyActionLookup = _hotKeySettings.HotKeys.ToDictionary(k => k.Action, v => v);
 
             // Setup an event handler to capture the WN_HOTKEY message which occurs when the user pressed a registered hotkey
             ComponentDispatcher.ThreadFilterMessage += (ref MSG msg, ref bool handled) =>
@@ -49,9 +32,9 @@ namespace TimeTrackR.Core.Hotkeys
                                                            {
                                                                var hotkeyID = (ushort)msg.wParam;
 
-                                                               if(_hotkeyIDLookup[hotkeyID] != null)
+                                                               if(_hotkeyIdLookup[hotkeyID] != null)
                                                                {
-                                                                   _hotkeyIDLookup[hotkeyID].Callback();
+                                                                   _hotkeyIdLookup[hotkeyID].Callback();
                                                                }
                                                            }
                                                        };

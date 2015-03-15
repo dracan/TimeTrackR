@@ -68,6 +68,7 @@
     <Compile Include="Hotkeys\HotkeyActions.cs" />
     <Compile Include="Hotkeys\HotkeyManager.cs" />
     <Compile Include="Hotkeys\IHotKeyRegisterCallback.cs" />
+    <Compile Include="Hotkeys\HotKeySettings.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Tags\ITagSetProvider.cs" />
     <Compile Include="Tags\Tag.cs" />
