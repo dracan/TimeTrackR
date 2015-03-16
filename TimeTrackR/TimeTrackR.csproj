@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -95,8 +96,12 @@
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Helpers\WindowHelpers.cs" />
+    <Compile Include="ViewModels\QuickTagSelectViewModel.cs" />
     <Compile Include="Views\Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuickTagSelect.xaml.cs">
+      <DependentUpon>QuickTagSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TagSelection.xaml.cs">
       <DependentUpon>TagSelection.xaml</DependentUpon>
@@ -123,6 +128,10 @@
     <Page Include="Views\Report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuickTagSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TagSelection.xaml">
       <SubType>Designer</SubType>

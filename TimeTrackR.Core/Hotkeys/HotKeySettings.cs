@@ -39,6 +39,11 @@ namespace TimeTrackR.Core.Hotkeys
                               Action = HotkeyActions.ShowReportWindow,
                               GlobalHotkey = new GlobalHotkey(90 /* z */, GlobalHotkey.MOD_WIN)
                           },
+                          new Hotkey
+                          {
+                              Action = HotkeyActions.ShowQuickTagSelect,
+                              GlobalHotkey = new GlobalHotkey(83 /* s */, GlobalHotkey.MOD_WIN)
+                          },
                       };
         }
     }

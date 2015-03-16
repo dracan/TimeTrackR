@@ -5,6 +5,7 @@
         StartTimer,
         StopTimer,
         SetTags,
-        ShowReportWindow
+        ShowReportWindow,
+        ShowQuickTagSelect
     }
 }

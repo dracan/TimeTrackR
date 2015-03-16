@@ -47,6 +47,7 @@ namespace TimeTrackR.ViewModels
             HotKeyRegisterCallback.SetCallback(HotkeyActions.StopTimer, StopTimer);
             HotKeyRegisterCallback.SetCallback(HotkeyActions.SetTags, SetTags);
             HotKeyRegisterCallback.SetCallback(HotkeyActions.ShowReportWindow, ShowReport);
+            HotKeyRegisterCallback.SetCallback(HotkeyActions.ShowQuickTagSelect, ShowQuickTagSelect);
         }
 
         private void StartTimer()
@@ -102,6 +103,33 @@ namespace TimeTrackR.ViewModels
             else
             {
                 existingWindow.Activate();
+            }
+        }
+
+        private void ShowQuickTagSelect()
+        {
+            var viewModel = new QuickTagSelectViewModel(Timer.HistoryItems, TagSetProvider);
+            var window = new QuickTagSelect { DataContext = viewModel };
+            window.ShowDialog();
+
+            if(viewModel.Cancelled)
+            {
+                return;
+            }
+
+            if(Timer.State == Timer.States.Started)
+            {
+                if(viewModel.HaveTagsChanged)
+                {
+                    // Restart the timer so that the new tagset is used
+                    Timer.Stop();
+                    Timer.Start();
+                }
+            }
+            else
+            {
+                Timer.Start();
+                OnPropertyChanged("SystemTrayIcon");
             }
         }
 
