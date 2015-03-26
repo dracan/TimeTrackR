@@ -1,4 +1,5 @@
-﻿using TimeTrackR.Core.Data;
+﻿using NLog;
+using TimeTrackR.Core.Data;
 using TimeTrackR.Core.Hotkeys;
 using TimeTrackR.Core.Tags;
 using TimeTrackR.Core.Timer;
@@ -16,6 +17,7 @@ namespace TimeTrackR.Classes
             Bind<IHotKeyRegisterCallback>().To<HotkeyManager>().InSingletonScope();
             Bind<IDataContext>().To<DataContext>().InSingletonScope();
             Bind<TimerHistoryItemRepository>().To<TimerHistoryItemRepository>().InSingletonScope();
+            Bind<Logger>().ToMethod(x => LogManager.GetLogger("MainLog")).InSingletonScope();
         }
     }
 }
