@@ -10,6 +10,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance ViewModels:QuickTagSelectViewModel}"
         WindowStartupLocation="CenterScreen"
+        Deactivated="QuickTagSelect_OnDeactivated"
+        Loaded="QuickTagSelect_OnLoaded"
         Topmost="True">
     <Grid>
         <StackPanel>

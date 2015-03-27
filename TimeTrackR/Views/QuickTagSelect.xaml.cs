@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using TimeTrackR.ViewModels;
 
@@ -26,6 +27,16 @@ namespace TimeTrackR.Views
 
                 Close();
             }
+        }
+
+        private void QuickTagSelect_OnDeactivated(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void QuickTagSelect_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Activate();
         }
     }
 }
