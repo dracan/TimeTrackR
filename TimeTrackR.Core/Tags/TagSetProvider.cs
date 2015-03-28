@@ -38,14 +38,17 @@ namespace TimeTrackR.Core.Tags
 
         public void AddFromDelimitedString(string delimitedString)
         {
-            var entries = (from x in delimitedString.Split(',')
-                           select x.Trim()).ToList();
-
-            foreach(var entry in entries)
+            if(!string.IsNullOrEmpty(delimitedString))
             {
-                if(!string.IsNullOrEmpty(entry))
+                var entries = (from x in delimitedString.Split(',')
+                               select x.Trim()).ToList();
+
+                foreach(var entry in entries)
                 {
-                    AddTag(new Tag {Name = entry});
+                    if(!string.IsNullOrEmpty(entry))
+                    {
+                        AddTag(new Tag {Name = entry});
+                    }
                 }
             }
         }
